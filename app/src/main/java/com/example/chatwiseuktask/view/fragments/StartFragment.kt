@@ -1,0 +1,40 @@
+package com.example.chatwiseuktask.view.fragments
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
+import com.example.chatwiseuktask.R
+import com.example.chatwiseuktask.databinding.FragmentStartBinding
+
+class StartFragment : Fragment() {
+
+    private lateinit var binding: FragmentStartBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentStartBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
+
+        binding.btnViewImage.setOnClickListener {
+            findNavController().navigate(R.id.action_startFragment_to_mainFragment)
+        }
+    }
+}
